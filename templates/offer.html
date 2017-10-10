@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer</title>
+
+    <style>
+
+        table{
+            width: 100%;
+            text-align: left;
+            padding-bottom: 20px;
+        }
+
+        th, td{
+            border-bottom: 1px solid gray;
+        }
+
+        tr:first-child{
+            background-color: lightgray;
+        }
+
+        .right{
+            text-align: right;
+        }
+
+        .pay_det{
+            padding-top: 80px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div>
+        <strong> Špela Giacomelli </strong> <br>
+        spela.giacomelli@gmail.com <br>
+        programerka <br>
+
+    </div>
+    <br>
+    <h1> Predračun št. {{ offer_number }}</h1>
+    <div>
+        <b> Kraj: </b> {{ place }} <br>
+        <b> Datum: </b> {{ date }} <br>
+        <br>
+    </div>
+
+    <table>
+        <tr>
+            <th> Izdelek </th>
+            <th> Količina </th>
+            <th> Cena brez DDV </th>
+            <th> DDV </th>
+            <th> Cena z DDV </th>
+
+        </tr>
+            {% for product in products %}
+            <tr>
+                <td> {{product.name }} </td>
+                <td> {{ product.quantity }} </td>
+                <td> {{ product.price_no_vat }} </td>
+                <td> 22.00 % </td>
+                <td> {{ product.price_with_vat }} </td>
+            </tr>
+            {% endfor %}
+    </table>
+
+
+    <div class = 'right'>
+        Znesek brez DDV: {{ total_no_vat }} €<br>
+        <strong> Znesek z DDV: {{ total_with_vat }} € </strong>
+    </div>
+
+</body>
+</html>
