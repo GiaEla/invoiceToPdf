@@ -32,7 +32,7 @@ def generate_object_number(date, last_object, type_of_object):
 
 
 
-def generate_pdf(template, context, dir_name, file_name):
+def create_pdf(template, context, dir_name, file_name):
     """
 
     :param template:

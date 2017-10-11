@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from orders.generators import generate_pdf, generate_object_number
+from orders.generators import generate_object_number, create_pdf
 
 
 class Offer(models.Model):
@@ -48,8 +48,16 @@ class Offer(models.Model):
     def generate_pdf(self):
 
         html_context = {
-            'products': [{'name': 'Karta', 'quantity': self.tickets, 'price_with_vat': 30.00, 'price_no_vat': 24.95},
-                         {'name': 'CD', 'quantity': self.cd, 'price_with_vat': 15.00, 'price_no_vat': 12.30}],
+            'products': [{'name': 'Karta',
+                          'quantity': self.tickets,
+                          'price_with_vat': (30.00 * self.tickets),
+                          'price_no_vat': (24.95 * self.tickets)
+                          },
+                         {'name': 'CD',
+                          'quantity': self.cd,
+                          'price_with_vat': (15.00 * self.cd),
+                          'price_no_vat': (12.30 * self.tickets)
+                          }],
             'offer_number': self.offer_number,
             'total_no_vat': self.total_no_vat,
             'total_with_vat': self.total_with_vat,
@@ -58,7 +66,7 @@ class Offer(models.Model):
             'pay_until': self.pay_until,
         }
 
-        pdf_path = generate_pdf('offer.html', html_context, 'offers', str(self.offer_number) + '.pdf')
+        pdf_path = create_pdf('offer.html', html_context, 'offers', str(self.offer_number) + '.pdf')
 
         return pdf_path
 

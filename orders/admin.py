@@ -11,7 +11,7 @@ from django.core.mail import EmailMessage, send_mail
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 
-from orders.generators import generate_pdf
+from orders.generators import create_pdf
 from orders.models import Offer
 
 
@@ -58,7 +58,7 @@ def generate_selected_pdf(modeladmin, request, queryset):
 
     return resp
 
-generate_pdf.short_description = "Izvozi kot .pdf"
+create_pdf.short_description = "Izvozi kot .pdf"
 
 
 def admin_mail(modeladmin, request, queryset):
